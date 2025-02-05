@@ -1,9 +1,12 @@
+import { Routes, Route } from "react-router";
+import { Home } from "./presentation/view/Home";
 function App() {
 
   return (
     <>
-    
-      <h1 class="font-bold text-amber-400">Hello World</h1>
+      <Routes>
+        <Route index element={<Home />} />
+      </Routes>
     </>
   )
 }
