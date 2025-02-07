@@ -1,18 +1,12 @@
-import React from 'react'
-import { useState } from 'react'
-export const Buttom = ({buttonName, url}) => {
-    const [num, setNum] = useState(0);
-
-    function handleClick() {
-        setNum(num + 1);
-        console.log(num);
-    }
-
+import React from "react";
+import { useState } from "react";
+export const Buttom = ({ buttonName, type, style}) => {
   return (
-    <button onClick={handleClick} class='bg-[#d01e23] text-white rounded-full p-10 cursor-pointer'>
-        <a href={url}>
-            <p>{buttonName}</p>
-        </a>
+    <button
+      className={`bg-Cereza py-[1rem] px-[2rem] rounded-full font-bold ${style}`}
+      type={type}
+    >
+      <p>{buttonName}</p>
     </button>
-  )
-}
+  );
+};
