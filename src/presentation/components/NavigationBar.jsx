@@ -13,7 +13,7 @@ export const NavigationBar = ({indexMenu}) => {
     <div className='border-4 border-CerezaSuave w-[80%] m-auto rounded-3xl h-14 flex flex-row items-center justify-around'>
         {
           options.map((option, index) => (
-            <div key={index} className={`${indexMenu === index ? "bg-CerezaSuave" : "" } flex flex-row items-center space-x-2 p-3 rounded-2xl w-auto`}>
+            <div key={index} className={`${indexMenu === index ? "bg-CerezaSuave text-white" : "" } flex flex-row items-center space-x-2 p-3 rounded-2xl w-auto text-xl`}>
               {option.icon}
             </div>
           ))

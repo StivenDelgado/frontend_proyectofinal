@@ -15,12 +15,12 @@ export const Chat = () => {
     <div className='flex flex-col items-center space-y-2 border-4 border-CerezaSuave rounded-3xl w-[80%] h-[60%] m-auto my-10 p-2'>
       <div className='flex flex-col w-[90%] h-[90%] overflow-y-scroll space-y-6 '>
         {messages.map((message, index) => (
-          <div key={index} className={`flex flex-row items-center space-x-2 ${message.role === "user" ? "bg-Granito self-end text-Hueso" : "self-start text-Granito"} p-3 rounded-2xl w-auto`}>
+          <div key={index} className={`flex flex-row items-center space-x-2 ${message.role === "user" ? "bg-Hueso self-end text-Granito" : "self-start text-Granito"} p-3 rounded-2xl w-auto`}>
             {message.text}
           </div>
         ))}
       </div>
-      <input type="text" onKeyUp={(e) => handleInput(e)} className='bg-Granito w-[90%] p-3 rounded-2xl text-Hueso border-0' />
+      <input type="text" onKeyUp={(e) => handleInput(e)} placeholder='Envía un mensaje a QuackCash' className='bg-Hueso outline w-[90%] p-3 rounded-2xl text-Granito border-0' />
     </div>
   )
 }
