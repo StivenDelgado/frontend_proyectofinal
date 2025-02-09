@@ -33,3 +33,4 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_FLOWER_08FB35910 }}
           app_location: "/" # Ruta raíz del proyecto
           output_location: "dist" # Carpeta generada por Vite para los archivos de producción
+          deployment_action: "upload"
