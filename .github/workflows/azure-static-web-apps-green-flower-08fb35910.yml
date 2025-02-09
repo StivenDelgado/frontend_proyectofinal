@@ -51,3 +51,6 @@ jobs:
   
       - name: Remove Git http.extraheader
         run: git config --unset-all http.extraheader || echo "No extraheader found"
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: npm install
