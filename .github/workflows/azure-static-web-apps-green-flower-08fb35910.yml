@@ -44,3 +44,10 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_FLOWER_08FB35910 }}
           action: "close"
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
+  
+      - name: Remove Git http.extraheader
+        run: git config --unset-all http.extraheader || echo "No extraheader found"
