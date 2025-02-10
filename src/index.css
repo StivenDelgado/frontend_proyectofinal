@@ -7,3 +7,12 @@
     --color-CerezaSuave: #d6484c;
     --color-VerdeMenta: #28aa8d;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+  
+.hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+}
+  

@@ -3,6 +3,8 @@ import { Home } from "./presentation/view/Home";
 import { Login } from "./presentation/view/Login";
 import Register from "./presentation/view/Register";
 import { Expenses } from "./presentation/view/expenses";
+import PasswordRecovery from "./presentation/view/PasswordRecovery";
+import { ChatBot } from "./presentation/view/ChatBot";
 function App() {
 
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/expenses" element={<Expenses />} />
+        <Route path="/recovery" element={<PasswordRecovery />}/>
+        <Route path="/chatbot" element={<ChatBot />} />
       </Routes>
     </>
   )
