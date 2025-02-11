@@ -10,6 +10,9 @@ import { MdFileDownload } from "react-icons/md";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { ExpenseOption } from '../components/ui/ExpenseOption';
 import { NavigationBar } from '../components/NavigationBar';
+import { Input } from '../components/ui/Input';
+import { IoMdClose } from "react-icons/io";
+import { Select } from '../components/ui/Select';
 
 
 
@@ -33,6 +36,30 @@ export const Expenses = () => {
         {icon: "🐷", name: "Ahorro mes enero", amount: "500.000", isExpense:false},
         {icon: "🍔", name: "Salida a comer", amount: "29.000", isExpense:true},
     ] 
+
+    const submitAddExpenseForm = (e) =>{
+      e.preventDefault()
+      const form = e.target
+      const data = new FormData(form)
+      const formData = Object.fromEntries(data.entries())
+      console.log(formData);
+    }
+
+    const submitIncomeForm = (e) =>{
+      e.preventDefault()
+      const form = e.target
+      const data = new FormData(form)
+      const formData = Object.fromEntries(data.entries())
+      console.log(formData);
+    }
+
+    const submitChangeSalaryForm = (e) =>{
+      e.preventDefault()
+      const form = e.target
+      const data = new FormData(form)
+      const formData = Object.fromEntries(data.entries())
+      console.log(formData);
+    }
 
   return (
     < >
@@ -68,20 +95,112 @@ export const Expenses = () => {
                 >
 
                 <div className='flex flex-col items-end pt-10 pr-11 gap-6 '>
-                    <ExpenseOption optionText="Agregar gasto" icon={<GiPayMoney className='text-Granito text-4xl'onClick={() => {setAddExpenseOptionAddition(!addExpenseOptionAddition)}}/>} />
-                    <ExpenseOption optionText="Agregar ingreso" icon={<FaMoneyBillTrendUp className='text-Granito text-4xl'onClick={() => {setAddExpenseOptionSubtraction(!addExpenseOptionSubtraction)}}/>}/>
-                    <ExpenseOption optionText="Cambiar sueldo" icon={<FaMoneyBillTransfer className='text-Granito text-4xl'onClick={() => {setAddExpenseOptionChangeSalary(!addExpenseOptionChangeSalary)}}/>}/>
-                    <ExpenseOption optionText="Descargar resumen" icon={<MdFileDownload className='text-Granito text-4xl'onClick={() => {setAddExpenseOptionDownloadSummary(!addExpenseOptionDownloadSummary)}}/>}/>
+                    <ExpenseOption optionFunc={() => {setAddExpenseOptionAddition(!addExpenseOptionAddition);setAddExpense(!addExpense)}} optionText="Agregar gasto" icon={<GiPayMoney className='text-Granito text-4xl'/>} />
+                    <ExpenseOption optionFunc={() => {setAddExpenseOptionSubtraction(!addExpenseOptionSubtraction);setAddExpense(!addExpense)}} optionText="Agregar ingreso" icon={<FaMoneyBillTrendUp className='text-Granito text-4xl'/>}/>
+                    <ExpenseOption optionFunc={() => {setAddExpenseOptionChangeSalary(!addExpenseOptionChangeSalary);setAddExpense(!addExpense)}} optionText="Cambiar sueldo" icon={<FaMoneyBillTransfer className='text-Granito text-4xl'/>}/>
+                    <ExpenseOption optionFunc={() => {setAddExpenseOptionDownloadSummary(!addExpenseOptionDownloadSummary);setAddExpense(!addExpense)}} optionText="Descargar resumen" icon={<MdFileDownload className='text-Granito text-4xl'/>}/>
                 </div>
                     
             </div>
 
+            {/* MODAL DE AGREGAR GASTO */}
             <div className={clsx([
-              addExpenseOptionAddition ? "h-[45vh] w-full" : "h-0 w-0",
-              "fixed top-20 right-0 bg-Granito"
+              addExpenseOptionAddition ? "h-[60vh] w-95" : "h-0 w-0 border-none",
+              "fixed top-45 right-0 bg-Hueso/90 transition-all rounded-2xl mx-6 border-1 border-black duration-400 "
             ])}
-            
             >
+
+              <div className={clsx([
+                addExpenseOptionAddition ? "w-full h-full flex flex-col content-center items-center" : "hidden"
+              ])}>
+                <IoMdClose  className='text-5xl fixed right-10 pt-5' onClick={() => setAddExpenseOptionAddition(!addExpenseOptionAddition)}/>
+                <header>
+                  <h2 className='text-Granito text-[2em] pt-10 font-bold'>
+                    Ingresa tu gasto
+                  </h2>
+                </header>
+                  <form className='pt-5 flex flex-col content-center items-center' onSubmit={(e)=>submitAddExpenseForm(e)}>
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>Nombre de tu gasto</label>
+                    <Input  name="nombreGasto" type="text" placeholder="Nombre de tu gasto aqui"/>
+
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>¿Que cantidad gastaste?</label>
+                    <Input  name="cantidadGasto" type="number" placeholder="Cantidad de tu gasto"/>
+
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>Ponle un icono a tu gasto 😃</label>
+                    <Input  name="iconoGasto" type="text" placeholder="Ejemplo: 🍽 🍔 📲 🚕 🍕"/>
+
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>Categoriza tu gasto</label>
+                    
+                    <Select tittle="Elige opcion" options={["Oseo", "Entretenimiento", "Comida", "Transporte", "Gasto obligatorio", "Salud"]}/>
+
+                    <Buttom buttonName="Crear gasto" type="submit" style="mt-10 text-Granito"/>
+                  </form>
+                
+              </div>
+
+            </div>
+
+            {/* MODAL DE INGREGAR INGRESO */}
+            <div className={clsx([
+              addExpenseOptionSubtraction ? "h-[60vh] w-95" : "h-0 w-0 border-none",
+              "fixed top-45 right-0 bg-Hueso/90 transition-all rounded-2xl mx-6 border-1 border-black duration-400 "
+            ])}
+            >
+
+              <div className={clsx([
+                addExpenseOptionSubtraction ? "w-full h-full flex flex-col content-center items-center" : "hidden"
+              ])}>
+                <IoMdClose  className='text-5xl fixed right-10 pt-5' onClick={() => setAddExpenseOptionSubtraction(!addExpenseOptionSubtraction)}/>
+                <header>
+                  <h2 className='text-Granito text-[2em] pt-10 font-bold'>
+                    Ingresa tu ingreso
+                  </h2>
+                </header>
+                  <form className='pt-5 flex flex-col content-center items-center' onSubmit={(e)=>submitIncomeForm(e)}>
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>Nombre de tu ingreso</label>
+                    <Input  name="nombreGasto" type="text" placeholder="Nombre de tu ingreso aqui"/>
+
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>¿Que cantidad quieres ingresar?</label>
+                    <Input  name="cantidadGasto" type="number" placeholder="Cantidad de tu ingreso"/>
+
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>Ponle un icono a tu ingreso 🤑</label>
+                    <Input  name="iconoGasto" type="text" placeholder="Ejemplo: 🍽 🍔 📲 🚕 🍕"/>
+
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>Categoriza tu ingreso</label>
+                    
+                    <Select tittle="Elige opcion" options={["Oseo", "Entretenimiento", "Comida", "Transporte", "Gasto oblogatorio", "Salud"]}/>
+
+                    <Buttom buttonName="Crear gasto" type="submit" style="mt-10 text-Granito"/>
+                  </form>
+                
+              </div>
+
+            </div>
+
+              {/* MODAL DE CAMBIAR SUELDO */}
+            <div className={clsx([
+              addExpenseOptionChangeSalary ? "h-[40vh] w-95" : "h-0 w-0 border-none",
+              "fixed top-60 right-0 bg-Hueso/90 transition-all rounded-2xl mx-6 border-1 border-black duration-400 "
+            ])}
+            >
+
+              <div className={clsx([
+                addExpenseOptionChangeSalary ? "w-full h-full flex flex-col content-center items-center" : "hidden"
+              ])}>
+                <IoMdClose  className='text-5xl fixed right-10 pt-5' onClick={() => setAddExpenseOptionChangeSalary(!addExpenseOptionChangeSalary)}/>
+                <header>
+                  <h2 className='text-Granito text-[2em] pt-10 font-bold'>
+                    Cambiemos tu sueldo
+                  </h2>
+                </header>
+                  <form className='pt-5 flex flex-col content-center items-center' onSubmit={(e)=>submitChangeSalaryForm(e)}>
+                    <label htmlFor="" class='font-bold pl-2  text-Granito'>¿Cual es tu nuevo sueldo?</label>
+                    <Input  name="nuevoSueldo" type="number" placeholder="Tu nuevo sueldo"/>
+
+                    <Buttom buttonName="Crear gasto" type="submit" style="mt-10 text-Granito"/>
+                  </form>
+                
+              </div>
 
             </div>
             
