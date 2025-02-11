@@ -75,6 +75,15 @@ export const Expenses = () => {
                 </div>
                     
             </div>
+
+            <div className={clsx([
+              addExpenseOptionAddition ? "h-[45vh] w-full" : "h-0 w-0",
+              "fixed top-20 right-0 bg-Granito"
+            ])}
+            
+            >
+
+            </div>
             
             <NavigationBar indexMenu={2}/>
         </div>
