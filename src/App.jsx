@@ -14,6 +14,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/recovery" element={<PasswordRecovery />}/>
         <Route path="/chatbot" element={<ChatBot />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/metas" element={<Metas />} />
       </Routes>
     </>
   )
