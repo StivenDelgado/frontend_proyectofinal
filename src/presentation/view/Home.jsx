@@ -21,7 +21,7 @@ export const Home = () => {
 
         <div class=" px-15"> 
 
-          <Link to={"/chat-bot"}>
+          <Link to={"/chatbot"}>
           <HomeCard img={quackCash} tittle="QuackCash" description="¡Ahorra sin esfuerzo! Chatea con nuestro boty recibe planes de ahorro personalizados según tus hábitos. 📈💡"/>
           </Link>
 
@@ -29,7 +29,7 @@ export const Home = () => {
           <HomeCard img={ahorro} tittle="Control de Gastos" description="Registra, clasifica y mantén a raya tus gastos. Recibe alertas antes de pasarte del límite. ¡Toma el control! 💰🔥"/>
           </Link>
 
-          <Link to={"/metas"}>
+          <Link to={"/goals"}>
           <HomeCard img={metas} tittle="Mis Metas" description="Fija tus objetivos de ahorro y mira cómo crece tu dinero. ¡Organízate y alcanza tus sueños más rápido! 🚀💵"/>
           </Link>
 
