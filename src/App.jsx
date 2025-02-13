@@ -4,6 +4,7 @@ import { Login } from "./presentation/view/Login";
 import Register from "./presentation/view/Register";
 import PasswordRecovery from "./presentation/view/PasswordRecovery";
 import { ChatBot } from "./presentation/view/ChatBot";
+import Goals from "./presentation/view/Goals";
 function App() {
 
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/recovery" element={<PasswordRecovery />}/>
         <Route path="/chatbot" element={<ChatBot />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/metas" element={<Metas />} />
+        <Route path="/goals" element={<Goals />} />
       </Routes>
     </>
   )
