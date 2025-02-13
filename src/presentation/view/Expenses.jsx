@@ -19,30 +19,31 @@ import { Select } from '../components/ui/Select';
 export const Expenses = () => {
 
     const [addExpense, setAddExpense] = useState(false)
+    const [filter, setFilter] = useState(false)
     const [addExpenseOptionAddition, setAddExpenseOptionAddition] = useState(false)
     const [addExpenseOptionSubtraction, setAddExpenseOptionSubtraction] = useState(false)
     const [addExpenseOptionChangeSalary, setAddExpenseOptionChangeSalary] = useState(false)
     const [addExpenseOptionDownloadSummary, setAddExpenseOptionDownloadSummary] = useState(false)
 
-    const expenses =[
-        {icon: "🐪", name: "Bono del trabajo", amount: "50.000", isExpense:false},
-        {icon: "🍔", name: "Salida a comer", amount: "29.000", isExpense:true},
-        {icon: "🎁", name: "Regalo para mama", amount: "98.000", isExpense:true},
-        {icon: "🚕", name: "Pago del uber", amount: "20.000", isExpense:true},
-        {icon: "💸", name: "Me encontre plata", amount: "55.000", isExpense:false},
-        {icon: "📲", name: "Pago plan de datos", amount: "19.500", isExpense:true},
-        {icon: "🍔", name: "Salida a comer", amount: "29.000", isExpense:true},
-        {icon: "💸", name: "Me encontre plata", amount: "55.000", isExpense:false},
-        {icon: "🐷", name: "Ahorro mes enero", amount: "500.000", isExpense:false},
-        {icon: "🍔", name: "Salida a comer", amount: "29.000", isExpense:true},
-    ] 
+    const [expenses, setExpenses] = useState([
+        {icon: "🐪", name: "Bono del trabajo", amount: "50.000", isExpense:false, category: "Trabajo"},
+        {icon: "🍔", name: "Salida a comer", amount: "29.000", isExpense:true, category: "Comida"},
+        {icon: "🎁", name: "Regalo para mama", amount: "98.000", isExpense:true, category: "Otros"},
+        {icon: "🚕", name: "Pago del uber", amount: "20.000", isExpense:true, category: "Transporte"},
+        {icon: "💸", name: "Me encontre plata", amount: "55.000", isExpense:false, category: "Otros"},
+        {icon: "📲", name: "Pago plan de datos", amount: "19.500", isExpense:true, category: "Gasto obligatorio"},
+        {icon: "🍔", name: "Salida a comer", amount: "29.000", isExpense:true, category: "Comida"},
+        {icon: "💸", name: "Me encontre plata", amount: "55.000", isExpense:false, category: "Otros"},
+        {icon: "🐷", name: "Ahorro mes enero", amount: "500.000", isExpense:false, category: "Ahorro"},
+        {icon: "🍔", name: "Salida a comer", amount: "29.000", isExpense:true, category: "Comida"},
+    ] )
 
     const submitAddExpenseForm = (e) =>{
       e.preventDefault()
       const form = e.target
       const data = new FormData(form)
       const formData = Object.fromEntries(data.entries())
-      console.log(formData);
+      form.reset()
     }
 
     const submitIncomeForm = (e) =>{
@@ -50,7 +51,7 @@ export const Expenses = () => {
       const form = e.target
       const data = new FormData(form)
       const formData = Object.fromEntries(data.entries())
-      console.log(formData);
+      form.reset()
     }
 
     const submitChangeSalaryForm = (e) =>{
@@ -58,7 +59,16 @@ export const Expenses = () => {
       const form = e.target
       const data = new FormData(form)
       const formData = Object.fromEntries(data.entries())
-      console.log(formData);
+      form.reset()
+    }
+
+    const submitfilter = (e) =>{
+      e.preventDefault()
+      const form = e.target
+      const data = new FormData(form)
+      const formData = Object.fromEntries(data.entries())
+      setExpenses(expenses.filter((expense)=>expense.category === formData.categoria))
+      form.reset()
     }
 
   return (
@@ -78,29 +88,30 @@ export const Expenses = () => {
             }
           </main>
             <div className=' w-full flex justify-end items-center px-10 py-5 gap-x-5'>
-                <FaFilter className='text-4xl text-Cereza' />
+                <FaFilter className='text-4xl text-Cereza' onClick={() =>{setFilter(!filter)}}/>
                 <IoIosAddCircleOutline  className='text-5xl text-Cereza z-30' onClick={() =>{setAddExpense(!addExpense)}}/>
-                {
-                // addExpense &&
-                // <div className='py-8 absolute bottom-full right-0 space-y-8 bg'>
-                //     <button>hola</button>
-                // </div>
-                }
             </div>
-            <div
-                className={clsx([
-                addExpense ? "h-[45vh] w-full" : "h-0 w-0",
-                "fixed bottom-0 right-0 bg-white/80 transition-all z-10 duration-400 flex flex-col rounded-t-2xl"
-                ])}
-                >
 
-                <div className='flex flex-col items-end pt-10 pr-11 gap-6 '>
-                    <ExpenseOption optionFunc={() => {setAddExpenseOptionAddition(!addExpenseOptionAddition);setAddExpense(!addExpense)}} optionText="Agregar gasto" icon={<GiPayMoney className='text-Granito text-4xl'/>} />
-                    <ExpenseOption optionFunc={() => {setAddExpenseOptionSubtraction(!addExpenseOptionSubtraction);setAddExpense(!addExpense)}} optionText="Agregar ingreso" icon={<FaMoneyBillTrendUp className='text-Granito text-4xl'/>}/>
-                    <ExpenseOption optionFunc={() => {setAddExpenseOptionChangeSalary(!addExpenseOptionChangeSalary);setAddExpense(!addExpense)}} optionText="Cambiar sueldo" icon={<FaMoneyBillTransfer className='text-Granito text-4xl'/>}/>
-                    <ExpenseOption optionFunc={() => {setAddExpenseOptionDownloadSummary(!addExpenseOptionDownloadSummary);setAddExpense(!addExpense)}} optionText="Descargar resumen" icon={<MdFileDownload className='text-Granito text-4xl'/>}/>
-                </div>
-                    
+            {/* MODAL DE OPCIONES DE GASTOS */}
+            <div className={clsx([
+              addExpense ? "h-[100vh] w-full" : "h-0 w-0",
+              "fixed bottom-0 right-0 bg-transparent transition-all z-10 duration-400 flex flex-col rounded-t-2xl"])}
+              onClick={() => setAddExpense(false)}
+            >
+              <div
+                  className={clsx([
+                  addExpense ? "h-[45vh] w-full" : "h-0 w-0",
+                  "fixed bottom-0 right-0 bg-white/80 transition-all z-10 duration-400 flex flex-col rounded-t-2xl"
+                  ])}
+                  >
+                  <div className='flex flex-col items-end pt-10 pr-11 gap-6 '>
+                      <ExpenseOption optionFunc={() => {setAddExpenseOptionAddition(!addExpenseOptionAddition);setAddExpense(!addExpense)}} optionText="Agregar gasto" icon={<GiPayMoney className='text-Granito text-4xl'/>} />
+                      <ExpenseOption optionFunc={() => {setAddExpenseOptionSubtraction(!addExpenseOptionSubtraction);setAddExpense(!addExpense)}} optionText="Agregar ingreso" icon={<FaMoneyBillTrendUp className='text-Granito text-4xl'/>}/>
+                      <ExpenseOption optionFunc={() => {setAddExpenseOptionChangeSalary(!addExpenseOptionChangeSalary);setAddExpense(!addExpense)}} optionText="Cambiar sueldo" icon={<FaMoneyBillTransfer className='text-Granito text-4xl'/>}/>
+                      <ExpenseOption optionFunc={() => {setAddExpenseOptionDownloadSummary(!addExpenseOptionDownloadSummary);setAddExpense(!addExpense)}} optionText="Descargar resumen" icon={<MdFileDownload className='text-Granito text-4xl'/>}/>
+                  </div>
+              
+              </div>
             </div>
 
             {/* MODAL DE AGREGAR GASTO */}
@@ -130,8 +141,7 @@ export const Expenses = () => {
                     <Input  name="iconoGasto" type="text" placeholder="Ejemplo: 🍽 🍔 📲 🚕 🍕"/>
 
                     <label htmlFor="" class='font-bold pl-2  text-Granito'>Categoriza tu gasto</label>
-                    
-                    <Select tittle="Elige opcion" options={["Oseo", "Entretenimiento", "Comida", "Transporte", "Gasto obligatorio", "Salud"]}/>
+                    <Select tittle="Elige opcion" options={["Oseo", "Entretenimiento", "Ahorro", "Comida", "Transporte", "Gasto obligatorio", "Salud", "Trabajo", "Otros"]}/>
 
                     <Buttom buttonName="Crear gasto" type="submit" style="mt-10 text-Granito"/>
                   </form>
@@ -168,7 +178,7 @@ export const Expenses = () => {
 
                     <label htmlFor="" class='font-bold pl-2  text-Granito'>Categoriza tu ingreso</label>
                     
-                    <Select tittle="Elige opcion" options={["Oseo", "Entretenimiento", "Comida", "Transporte", "Gasto oblogatorio", "Salud"]}/>
+                    <Select tittle="Elige opcion" options={["Oseo", "Entretenimiento", "Ahorro", "Comida", "Transporte", "Gasto obligatorio", "Salud", "Trabajo", "Otros"]}/>
 
                     <Buttom buttonName="Crear gasto" type="submit" style="mt-10 text-Granito"/>
                   </form>
@@ -177,7 +187,7 @@ export const Expenses = () => {
 
             </div>
 
-              {/* MODAL DE CAMBIAR SUELDO */}
+            {/* MODAL DE CAMBIAR SUELDO */}
             <div className={clsx([
               addExpenseOptionChangeSalary ? "h-[40vh] w-95" : "h-0 w-0 border-none",
               "fixed top-60 right-0 bg-Hueso/90 transition-all rounded-2xl mx-6 border-1 border-black duration-400 "
@@ -203,11 +213,35 @@ export const Expenses = () => {
               </div>
 
             </div>
+
+            {/* MODAL DE FILTRAR GASTOS */}
+            <div className={clsx([
+              filter ? "h-[30vh] w-95" : "h-0 w-0 border-none",
+              "fixed bottom-45 right-0 bg-Hueso/90 transition-all from-5% rounded-2xl mx-6 border-1 border-black duration-400 "])}
+            >
+
+              <div className={clsx([
+                filter ? "w-full h-full flex flex-col content-center items-center" : "hidden"
+                ])}>
+                <IoMdClose  className='text-5xl fixed right-10 pt-5' onClick={() => setFilter(!filter)}/>
+                <header>
+                  <h2 className='text-Granito text-[2em] pt-10 font-bold'>
+                    Filtrar
+                  </h2>
+                </header>
+                  <form className='pt-5 flex flex-col content-center items-center' onSubmit={(e)=>submitfilter(e)}>
+                    
+                    <Select tittle="¿Que deseas filtrar?" options={["Oseo", "Entretenimiento", "Ahorro", "Comida", "Transporte", "Gasto obligatorio", "Salud", "Trabajo", "Otros"]}/>
+
+                    <Buttom buttonName="Filtrar" type="submit" style="mt-10 text-Granito"/>
+                  </form>
+                
+              </div>
+
+            </div>
             
             <NavigationBar indexMenu={2}/>
-        </div>
-                
+        </div>     
     </>
-
   )
 }
