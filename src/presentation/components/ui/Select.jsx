@@ -1,14 +1,14 @@
 import React from "react";
 
-export const Select = ({tittle,options}) => {
+export const Select = ({defaultValue,options}) => {
   return (
-    <select className="" name="categoria" id="">
-      <option disabled selected value="">
-        {tittle}
+    <select className="" name="categoria"  >
+      <option selected disabled>
+        {defaultValue}
       </option>
       {
-       options.map((element) =>(
-        <option  value={element}>{element}</option>
+       options.map((element, index) =>(
+        <option key={index} value={element}>{element}</option>
        ))
       }
     </select>

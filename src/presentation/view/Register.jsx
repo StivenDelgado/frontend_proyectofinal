@@ -22,15 +22,15 @@ const Register = () => {
   }
 
   return (
-    <div class='bg-Hueso w-full h-screen flex-col items-center justify-center'> 
-        <div class='w-[80%] m-auto h-screen flex-col items-center justify-center'>
-          <h1 class='text-[3em] text-center font-extrabold py-[2.5rem]'>SaveUp</h1>
-          <p class='w-full text-center text-Granito'>!Que <span class='text-Cereza'>bacano</span> tenerte con nosotros¡ Juntos vamos a darle un orden a tus finanzas.</p>
-          <form class='pt-[2rem]' onSubmit={(e)=>submitForm(e)}>
+    <div className='bg-Hueso w-full h-screen flex-col items-center justify-center'> 
+        <div className='w-[80%] m-auto h-screen flex-col items-center justify-center'>
+          <h1 className='text-[3em] text-center font-extrabold py-[2.5rem]'>SaveUp</h1>
+          <p className='w-full text-center text-Granito'>!Que <span className='text-Cereza'>bacano</span> tenerte con nosotros¡ Juntos vamos a darle un orden a tus finanzas.</p>
+          <form className='pt-[2rem]' onSubmit={(e)=>submitForm(e)}>
               {
                 inputs.map((input, index)=>(
                   <div key={index}>
-                      <label htmlFor="" class='font-bold pl-2  text-Granito'>{input.label}</label>
+                      <label htmlFor="" className='font-bold pl-2  text-Granito'>{input.label}</label>
                       {input.componente}
                   </div>
                 ))
