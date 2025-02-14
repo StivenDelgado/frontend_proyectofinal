@@ -5,5 +5,14 @@
     --color-Hueso: #f1f1f1;
     --color-Granito: #3f3f3f;
     --color-CerezaSuave: #d6484c;
-    --color-VerdeMenta: #28aa8d
+    --color-VerdeMenta: #28aa8d;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+  
+.hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+}
+  
