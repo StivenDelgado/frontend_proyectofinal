@@ -5,10 +5,13 @@ import Register from "./presentation/view/Register";
 import { Expenses } from "./presentation/view/Expenses";
 import PasswordRecovery from "./presentation/view/PasswordRecovery";
 import { ChatBot } from "./presentation/view/ChatBot";
+import { NewPassword } from "./presentation/view/NewPassword";
+import { Toaster } from "sonner";
 function App() {
 
   return (
     <>
+    <Toaster />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -16,6 +19,7 @@ function App() {
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/recovery" element={<PasswordRecovery />}/>
         <Route path="/chatbot" element={<ChatBot />} />
+        <Route path="/newpassword" element={<NewPassword />} />
       </Routes>
     </>
   )
