@@ -13,7 +13,7 @@ export const Chat = () => {
 
   return (
     <div className='flex flex-col items-center space-y-2 border-4 border-CerezaSuave rounded-3xl w-[80%] h-[60%] m-auto my-10 p-2'>
-      <div className='flex flex-col w-[90%] h-[90%] overflow-y-scroll space-y-6 '>
+      <div className='flex flex-col w-[90%] h-[90%] overflow-y-scroll space-y-6 hide-scrollbar '>
         {messages.map((message, index) => (
           <div key={index} className={`flex flex-row items-center space-x-2 ${message.role === "user" ? "bg-Hueso self-end text-Granito" : "self-start text-Granito"} p-3 rounded-2xl w-auto`}>
             {message.text}
